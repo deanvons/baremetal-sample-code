@@ -29,8 +29,6 @@ Each example is intentionally small, register‑level, and self‑contained so y
 F4_chip_headers/ CMSIS/        # Vendor headers & core CMSIS (used by all examples)
 ```
 
-> Folder names map to the learning path you’ve been following in class.
-
 ---
 
 ## Target & Prerequisites
@@ -87,4 +85,5 @@ Optional:
 
 ---
 
+Credits: Israel Gbati
 
