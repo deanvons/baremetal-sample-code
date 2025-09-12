@@ -87,13 +87,4 @@ Optional:
 
 ---
 
-## License
 
-MIT (see `LICENSE` if present). Code is classroom‑oriented; use at your own risk on other hardware.
-
----
-
-## Credits
-
-- CMSIS & STM32F4 device headers (STMicroelectronics / Arm CMSIS)  
-- Built and tested during Loop Academy embedded sessions  
