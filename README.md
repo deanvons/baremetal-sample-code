@@ -9,6 +9,15 @@ Part of the [Bare-Metal STM32F4 Samples](https://github.com/deanvons/baremetal-s
 - **Board:** NUCLEO-F411RE (STM32F411RET6)
 - **Style:** bare-metal, register-level, no HAL/LL
 
+## C and C++ versions
+
+This branch has both a **C** and a **C++** version of the same example — pick one, they cannot both be built (both define `main()`):
+
+- C: `Src/main.c`
+- C++: `Src/main.cpp`
+
+Delete the file set you don't want before importing into STM32CubeIDE (or building manually). The C++ version is a near 1:1 translation: `constexpr` instead of `#define`, `static_cast`/`reinterpret_cast` instead of C-style casts, `pragma once` instead of include guards — no classes or abstractions, so it stays easy to diff against the C version line by line.
+
 ## Build & Flash (STM32CubeIDE)
 
 1. Check out this branch (`00-led-toggle-addr`).
