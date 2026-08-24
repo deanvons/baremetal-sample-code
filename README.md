@@ -6,8 +6,6 @@ Each example is intentionally small, register‑level, and self‑contained so y
 
 > If you're new to this style: the idea is to *learn the peripherals*, not a framework. We use CMSIS headers only; no HAL/LL.
 
-Originally built while working through Israel Gbati's bare-metal STM32 course — all credit for the curriculum and examples goes to him. See [Credits](#credits) below.
-
 ---
 
 ## How this repo is organized
