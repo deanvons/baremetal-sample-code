@@ -12,6 +12,15 @@ Part of the [Bare-Metal STM32F4 Samples](https://github.com/deanvons/baremetal-s
 ## Peripheral notes
 
 - **USART2 (Nucleo-F411RE):** TX `PA2`, RX `PA3`, alternate function `AF7`, 115200-8-N-1.
+## C and C++ versions
+
+This branch has both a **C** and a **C++** version of the same example — pick one, they cannot both be built (both define `main()`):
+
+- C: `Src/main.c`, `Src/uart.c`, `Inc/uart.h`
+- C++: `Src/main.cpp`, `Src/uart.cpp`, `Inc/uart.hpp`
+
+Delete the file set you don't want before importing into STM32CubeIDE (or building manually). The C++ version is a near 1:1 translation: `constexpr` instead of `#define`, `static_cast`/`reinterpret_cast` instead of C-style casts, `pragma once` instead of include guards — no classes or abstractions, so it stays easy to diff against the C version line by line.
+
 ## Build & Flash (STM32CubeIDE)
 
 1. Check out this branch (`08-uart-rx`).
