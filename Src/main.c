@@ -1,47 +1,68 @@
+
+
+#include <stdint.h>
 #include "stm32f4xx.h"
 
 #define GPIOAEN			(1U<<0)
 #define GPIOCEN			(1U<<2)
 
+#define LED_PIN (1UL << 5)  // define led pin 5
+#define BTN_PIN	(1U << 13)	// define button pin 13
 
+void led_on() {
+	GPIOA->BSRR = LED_PIN; // turn on led
+}
 
-#define PIN5			(1U<<5)
-#define PIN13			(1U<<13)
+void led_off() {
+	GPIOA->BSRR = (1U<<21); // turn off led
+}
 
-#define LED_PIN			PIN5
-#define BTN_PIN			PIN13
-
+void toggle_led() {
+	GPIOA->ODR ^= LED_PIN;
+}
 
 
 int main(void)
 {
+	//RCC_AHB1ENR |= RCC_AHB1ENR_GPIOAEN; // turn clock on
 
-	/*Enable clock access to GPIOA and GPIOC*/
+	// turn clock on
 	RCC->AHB1ENR |=GPIOAEN;
 	RCC->AHB1ENR |=GPIOCEN;
 
-    /*Set PA5 as output pin*/
-	GPIOA->MODER |=(1U<<10);
-	GPIOA->MODER &=~(1U<<11);
+	// general purpose output mode: bit pair = 01
+	//GPIOA_MODER |= (1U << 10);
+	GPIOA->MODER |= (1U << 10);
+	//GPIOA_MODER &=~ (1U << 11);
+	GPIOA->MODER &=~ (1U << 11);
 
-	/*Set PC13 as input pin*/
+	// button pin to input
 	GPIOC->MODER &=~(1U<<26);
 	GPIOC->MODER &=~(1U<<27);
 
+	led_off();
 
-	while(1)
-	{
+	static int state;
 
-		/*Check if BTN is pressed*/
-		if(GPIOC->IDR & BTN_PIN)
-		{
-			/*Turn on led*/
-		GPIOA->BSRR = LED_PIN;
+    /* Loop forever */
+	for(;;) {
+
+		/*
+		if(GPIOC->IDR & BTN_PIN) { // read button
+			led_off();
 		}
-		else{
-			/*Turn off led*/
-		GPIOA->BSRR = (1U<<21);
+		else {
+			led_on();
+		}
+		*/
+
+		if(GPIOC->IDR & BTN_PIN) {
+			state = 1;
 		}
 
+		if(!(GPIOC->IDR & BTN_PIN) && state) {
+			toggle_led();
+			state = 0;
+		}
 	}
 }
